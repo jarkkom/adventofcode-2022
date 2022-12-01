@@ -1,0 +1,6 @@
+name = "adventofcode-2022"
+uuid = "17001c43-5df7-4ead-9b23-b3446d076bdd"
+authors = "<jarkko@iki.fi>"
+version = "1.0.0"
+
+[deps]
