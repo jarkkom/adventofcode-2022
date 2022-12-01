@@ -36,6 +36,6 @@ max_calories(elves) = maximum(sum.(elves))
 @assert(max_calories(sample_elves) == 24000)
 println("part 1 answer = $(max_calories(input_elves))")
 
-topk_sum_calories(elves) = sum(view(sort(sum.(elves), rev=true), 1:3))
+topk_sum_calories(elves) = sum(sort(sum.(elves), rev=true)[1:3])
 @assert(topk_sum_calories(sample_elves) == 45000)
 println("part 2 answer = $(topk_sum_calories(input_elves))")
