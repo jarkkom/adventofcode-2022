@@ -30,13 +30,12 @@ function read_calories(calories)
 end
 
 sample_elves = read_calories(sample)
+input_elves = read_calories(input)
 
-@assert(maximum(map(e -> sum(e), sample_elves)) == 24000)
+max_calories(elves) = maximum(map(e -> sum(e), elves))
+@assert(max_calories(sample_elves) == 24000)
+println("part 1 answer = $(max_calories(input_elves))")
 
-elves = read_calories(input)
-
-println("part 1 answer = $(maximum(map(e -> sum(e), elves)))")
-
-@assert(sum(view(sort(map(e -> sum(e), sample_elves), rev=true), 1:3)) == 45000)
-
-println("part 2 answer = $(sum(view(sort(map(e -> sum(e), elves), rev=true), 1:3)))")
+topk_sum_calories(elves) = sum(view(sort(map(e -> sum(e), elves), rev=true), 1:3))
+@assert(topk_sum_calories(sample_elves) == 45000)
+println("part 2 answer = $(topk_sum_calories(input_elves))")
