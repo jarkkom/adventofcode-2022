@@ -24,17 +24,9 @@ end
 function score_rounds(rounds)
     total = 0
 
-    move_map = Dict(
-        "A" => 0,
-        "X" => 0,
-        "B" => 1,
-        "Y" => 1,
-        "C" => 2,
-        "Z" => 2)
-
     for (_, round) in enumerate(rounds)
-        opponent = move_map[round[1]]
-        you = move_map[round[2]]
+        opponent = round[1][1] - 'A' 
+        you = round[2][1] - 'X'
         total += you + 1
 
         # draw?
@@ -53,30 +45,12 @@ end
 
 function score_rounds_2(rounds)
     total = 0
-
-    outcomes = Dict(
-        "X" => Dict(
-            "A" => 0 + 3,
-            "B" => 0 + 1,
-            "C" => 0 + 2,
-        ),
-        "Y" => Dict(
-            "A" => 3 + 1,
-            "B" => 3 + 2,
-            "C" => 3 + 3,
-        ),
-        "Z" => Dict(
-            "A" => 6 + 2,
-            "B" => 6 + 3,
-            "C" => 6 + 1,
-        ),
-    )
-    
+   
     for (_, round) in enumerate(rounds)
-        opp = round[1]
-        outcome = round[2]
+        opp = round[1][1]
+        outcome = round[2][1]
 
-        total += outcomes[outcome][opp]
+        total += (outcome - 'X') * 3 + ((opp - 'A' + outcome - 'X' + 2) % 3 + 1)
     end
 
     return total
