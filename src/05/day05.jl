@@ -45,11 +45,7 @@ function parse_moves(stacks, moves)
         end
     end
 
-    r = [] 
-    for (_, i) in enumerate(sort!(collect(keys(stacks))))
-        push!(r, stacks[i][1])
-    end
-    return join(r)
+    return join(map(x -> stacks[x][1], sort!(collect(keys(stacks)))))
 end
 
 function parse_moves_2(stacks, moves)
@@ -63,11 +59,7 @@ function parse_moves_2(stacks, moves)
         stacks[from] = stacks[from][n+1:end]
     end
 
-    r = [] 
-    for (_, i) in enumerate(sort!(collect(keys(stacks))))
-        push!(r, stacks[i][1])
-    end
-    return join(r)
+    return join(map(x -> stacks[x][1], sort!(collect(keys(stacks)))))
 end
 
 
