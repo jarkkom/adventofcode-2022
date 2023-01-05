@@ -86,6 +86,51 @@ function pour_sand(input)
     return grains
 end
 
+function pour_sand_until_blocked(input)
+    grains = 1
+
+    max_y = 0
+    for p in input
+        max_y = max(max_y, p[2])
+    end
+
+    grain_x = 500
+    grain_y = 0
+    while true
+        if !in((grain_x, grain_y + 1), input) && grain_y < max_y + 1
+            # we can move down
+            grain_y += 1
+            continue
+        elseif !in((grain_x - 1, grain_y + 1), input) && grain_y < max_y + 1
+            # we can move down and left
+            grain_x -= 1
+            grain_y += 1
+            continue
+        elseif !in((grain_x + 1, grain_y + 1), input) && grain_y < max_y + 1
+            # we can move down and right
+            grain_x += 1
+            grain_y += 1
+            continue
+        else
+            # we're blocked, exit
+            if grain_y == 0
+                println("bloked at $(grains)")
+                break
+            end
+
+            # can't move, grain stops here
+            push!(input, (grain_x, grain_y))
+            grains += 1
+            grain_x = 500
+            grain_y = 0
+        end
+    end
+    return grains
+end
+
 @assert(pour_sand(parse_input(sample)) == 24)
 println("answer for part 1 = $(pour_sand(parse_input(input)))")
 @assert(pour_sand(parse_input(input)) == 892)
+
+@assert(pour_sand_until_blocked(parse_input(sample)) == 93)
+println("answer for part 2 = $(pour_sand_until_blocked(parse_input(input)))")
